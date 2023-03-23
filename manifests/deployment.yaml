@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: gradle
+  name: gradle
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gradle
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: gradle
+    spec:
+      containers:
+      - image: draftaks.azurecr.io/gradle
+        name: gradle
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
