@@ -57,7 +57,10 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
+		<properties>
+    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>11</maven.compiler.source>
+</properties>
 	<build>
 		<plugins>
 			<plugin>
