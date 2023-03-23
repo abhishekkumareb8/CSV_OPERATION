@@ -1,13 +1,12 @@
-FROM gradle:jdk11 as BUILD
+FROM maven:3-jdk-11 as BUILD
 
-COPY --chown=gradle:gradle . /project
-RUN gradle -i -s -b /project/build.gradle clean build
+COPY . /usr/src/app
+RUN mvn --batch-mode -f /usr/src/app/pom.xml clean package
 
 FROM openjdk:11-jre-slim
 ENV PORT 80
 EXPOSE 80
+COPY --from=BUILD /usr/src/app/target /opt/target
+WORKDIR /opt/target
 
-COPY --from=BUILD /project/build/libs/* /opt/
-WORKDIR /opt/
-RUN ls -l
-CMD ["/bin/bash", "-c", "find -type f -name '*SNAPSHOT.jar' | xargs java -jar"]
+CMD ["/bin/bash", "-c", "find -type f -name '*-SNAPSHOT.jar' | xargs java -jar"]

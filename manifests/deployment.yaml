@@ -3,23 +3,23 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: gradle
-  name: gradle
+    app: maven
+  name: maven
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gradle
+      app: maven
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: gradle
+        app: maven
     spec:
       containers:
-      - image: draftaks.azurecr.io/gradle
-        name: gradle
+      - image: draftaks.azurecr.io/maven
+        name: maven
         ports:
         - containerPort: 80
         resources: {}
